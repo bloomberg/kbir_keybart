@@ -1,0 +1,34 @@
+BASE_RESOURCES=<ADD-YOUR-RESOURCES-FOLDER>
+
+run pretrain_runner.py \
+    --bart-model-dir ${BASE_RESOURCES}/resources/bart_large \
+    --train-data-dir ${BASE_RESOURCES}/resources/oagkx \
+    --eval-data-dir ${BASE_RESOURCES}/resources/oagkx_eval \
+    --keyphrase-universe ${BASE_RESOURCES}/resources/oagkx_keyphrase_universe/keyphrase_universe.txt \
+    --keyphrase-universe-size 500000 \
+    --train-batch-size 4 \
+    --eval-batch-size 2 \
+    --learning-rate 1e-5 \
+    --adam-epsilon 1e-6 \
+    --max-steps 130000 \
+    --save-steps 10000 \
+    --eval-steps 140000 \
+    --logging-steps 10000 \
+    --warmup-steps 2500 \
+    --mlm-probability 0.05 \
+    --keyphrase-mask-percentage 0.2 \
+    --keyphrase-replace-percentage 0.4 \
+    --do-train \
+    --do-eval \
+    --do-generation \
+    --use-bart \
+    --do-keyphrase-infilling \
+    --do-keyphrase-replacement \
+    --do-keyphrase-generation \
+    --task KLM \
+    --eval-task KLM \
+    --max-mask-keyphrase-pairs 10 \
+    --max-keyphrase-pairs 20 \
+    --kp-max-seq-len 10 \
+    --model-dir ${BASE_RESOURCES}/bart-kg-infill-replacement-models/ \
+    --dataloader-num-workers 5 \
